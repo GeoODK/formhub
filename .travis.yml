@@ -8,7 +8,6 @@ addons:
   postgresql: "9.1"
 before_install:
   -  sudo apt-get install -y postgresql python-psycopg2 postgresql-contrib
-  -  sudo apt-get install -y git build-essential python-all-dev python-pip python-lxml python-magic python-imaging default-jre libjpeg-dev libfreetype6-dev zlib1g-dev rabbitmq-server libxslt1-dev
   -  /usr/lib/postgresql/9.1/bin/createdb FormhubDjangoDB
   -  /usr/lib/postgresql/9.1/bin/createuser -P formhubDjangoApp
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
