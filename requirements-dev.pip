@@ -4,6 +4,7 @@ fabric
 ipdb
 ipython
 mock
+mocker
 httmock
 shell_command
 twill
