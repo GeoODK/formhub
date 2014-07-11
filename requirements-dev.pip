@@ -3,5 +3,7 @@ django-extensions
 fabric
 ipdb
 ipython
+mock
+httmock
 shell_command
 twill
