@@ -1,4 +1,5 @@
 clint
+decorator
 django-extensions
 fabric
 ipdb
