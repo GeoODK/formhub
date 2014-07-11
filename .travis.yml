@@ -9,10 +9,8 @@ addons:
 before_install:
   -  sudo apt-get install -y postgresql python-psycopg2 postgresql-contrib
   -  /usr/lib/postgresql/9.1/bin/createdb FormhubDjangoDB
-  -  /usr/lib/postgresql/9.1/bin/createuser -P formhubDjangoApp
+  -  /usr/lib/postgresql/9.1/bin/createuser formhubDjangoApp
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
-  -  sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so ~/virtualenv/python2.7/lib/
-  -  sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so ~/virtualenv/python2.7/lib/
 install:
   - pip install numpy --use-mirrors
   - pip install -r requirements.pip
