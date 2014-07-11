@@ -12,7 +12,12 @@ before_install:
   -  /usr/lib/postgresql/9.1/bin/createuser --no-createdb --no-createrole --no-superuser formhubDjangoApp
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
 install:
-  - pip install numpy --use-mirrors
+  - sudo pip install conda
+  - sudo conda init
+  - sudo conda update conda --yes
+  - deps='pip numpy pandas requests'
+  - conda create -p $HOME/py --yes $deps "python=$TRAVIS_PYTHON_VERSION"
+  - export PATH=$HOME/py/bin:$PATH
   - pip install -r requirements.pip
   - pip install -r requirements-dev.pip
   - python manage.py syncdb --noinput
