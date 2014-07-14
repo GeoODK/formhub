@@ -9,7 +9,6 @@ addons:
 before_install:
   -  sudo apt-get install -y postgresql python-psycopg2 postgresql-contrib
   -  /usr/lib/postgresql/9.1/bin/createdb formhub_test
-  -  /usr/lib/postgresql/9.1/bin/createuser --no-createdb --no-createrole --no-superuser travis
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
 install:
   - pip install numpy --use-mirrors
