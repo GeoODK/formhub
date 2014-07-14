@@ -14,8 +14,9 @@ install:
   - pip install numpy --use-mirrors
   - pip install -r requirements.pip
   - pip install -r requirements-dev.pip
-  - python manage.py syncdb --noinput
-  - python manage.py migrate --noinput
+  - python manage.py syncdb --noinput --settings=formhub.preset.travis_test
+  - python manage.py migrate --noinput --settings=formhub.preset.travis_test
+
 script:
   - python manage.py test --noinput --settings=formhub.preset.travis_test
   - ./js_tests/EnvJasmine/bin/run_all_tests.sh --testDir=../ --configFile=../env_jasmine.conf.js
