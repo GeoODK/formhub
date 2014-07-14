@@ -5,8 +5,8 @@ from formhub.settings import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'FormhubDjangoDB',
-        'USER': 'formhubDjangoApp',
+        'NAME': 'formhub_test',
+        'USER': 'travis',
         'HOST': 'localhost',
         'PORT': '',                      # Set to empty string for default.
     }
