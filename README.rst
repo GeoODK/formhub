@@ -1,5 +1,7 @@
 Formhub
 =======
+.. image:: https://api.travis-ci.org/SEL-Columbia/formhub.png?branch=master
+  :target: https://travis-ci.org/SEL-Columbia/formhub
 
 Getting Started
 ---------------
@@ -65,3 +67,4 @@ To compile MO files and update live translations
 
     $ django-admin.py compilemessages ;
     $ for app in {main,odk_viewer} ; do cd ${app} && django-admin.py compilemessages && cd - ; done
+
