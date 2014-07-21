@@ -11,8 +11,8 @@ before_install:
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
 install:
   - pip install numpy --use-mirrors
-  - pip install -r requirements.pip
-  - pip install -r requirements-dev.pip
+  - pip install -r requirements.pip --use-mirrors
+  - pip install -r requirements-dev.pip --use-mirrors
   - python manage.py syncdb --noinput
   - python manage.py migrate --noinput
 
