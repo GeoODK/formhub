@@ -1,21 +1,20 @@
 language: python
 services:
-  - psql
   - mongodb
 python:
   - "2.7"
 addons:
   postgresql: "9.1"
 before_install:
-  -  sudo apt-get install -y postgresql python-psycopg2 postgresql-contrib
+  -  sudo apt-get install -y python-psycopg2
   -  /usr/lib/postgresql/9.1/bin/createdb formhub_test
   -  sudo apt-get install gfortran libatlas-base-dev libjpeg-dev zlib1g-dev
 install:
   - pip install numpy --use-mirrors
   - pip install -r requirements.pip
   - pip install -r requirements-dev.pip
-  - python manage.py syncdb --noinput --settings=formhub.preset.travis_test
-  - python manage.py migrate --noinput --settings=formhub.preset.travis_test
+  - python manage.py syncdb --noinput
+  - python manage.py migrate --noinput
 
 script:
   - python manage.py test --noinput --settings=formhub.preset.travis_test
