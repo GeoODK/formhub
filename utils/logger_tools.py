@@ -56,8 +56,6 @@ uuid_regex = re.compile(r'<formhub><uuid>([^<]+)</uuid></formhub>',
 
 mongo_instances = settings.MONGO_DB.instances
 
-from time import sleep # just to prove a point in the travis test
-
 class SaveAttachments (threading.Thread):
     """Spawn a thread to save all the attachments for an Instance,
     so that create_instance() can return quickly, while all the
@@ -181,7 +179,6 @@ def create_instance(username, xml_file, media_files,
             if len(media_files) > 0:
                 dpi = SaveAttachments(duplicate_instance_pk, media_files)
                 dpi.start()
-                sleep(600) # just for the travis test
 
             raise DuplicateInstance()
         except IndexError:
@@ -231,7 +228,6 @@ def create_instance(username, xml_file, media_files,
     if len(media_files) > 0:
         atta = SaveAttachments(instance.pk, media_files)
         atta.start()
-        sleep(600) # just for the travis test
 
     return instance
 
