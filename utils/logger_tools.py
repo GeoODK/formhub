@@ -15,7 +15,6 @@ from django.core.files.storage import get_storage_class
 from django.core.mail import mail_admins
 from django.core.servers.basehttp import FileWrapper
 from django.db import IntegrityError
-from django.db import transaction
 from django.db.models.signals import pre_delete
 from django.http import HttpResponse, HttpResponseNotFound, \
     StreamingHttpResponse
@@ -57,6 +56,8 @@ uuid_regex = re.compile(r'<formhub><uuid>([^<]+)</uuid></formhub>',
 
 mongo_instances = settings.MONGO_DB.instances
 
+from time import sleep # just to prove a point in the travis test
+
 class SaveAttachments (threading.Thread):
     """Spawn a thread to save all the attachments for an Instance,
     so that create_instance() can return quickly, while all the
@@ -70,7 +71,6 @@ class SaveAttachments (threading.Thread):
             self.instance = None
         self.media_files = media_files
 
-    @transaction.autocommit
     def run(self):
         if self.instance is not None:
             for f in self.media_files:
@@ -78,7 +78,6 @@ class SaveAttachments (threading.Thread):
                                                  media_file=f,
                                                  mimetype=f.content_type)
 
-@transaction.autocommit
 def create_instance(username, xml_file, media_files,
                     status=u'submitted_via_web', uuid=None,
                     date_created_override=None, request=None):
@@ -92,21 +91,6 @@ def create_instance(username, xml_file, media_files,
         If there is no username and a uuid, submitting a touchform.
         If there is a username and a uuid, submitting a new ODK form.
     """
-
-    def _save_attachments (instance_pk):
-        """A function to save the media files associated with this Instance,
-        unfortunately not as a separate thread, which would allow this to
-        return faster, but this is the only way the travis tests will pass"""
-
-        try:
-            inst = Instance.objects.get(pk=instance_pk)
-            for f in media_files:
-                Attachment.objects.get_or_create(instance=inst,
-                                                 media_file=f,
-                                                 mimetype=f.content_type)
-        except Instance.DoesNotExist:
-            pass
-
 
     instance = None
     xform    = None
@@ -194,10 +178,11 @@ def create_instance(username, xml_file, media_files,
         try:
             # here, too, all we need is the pk so don't retrieve the whole object
             duplicate_instance_pk = Instance.objects.filter(uuid=new_uuid).values_list('pk', flat=True)[0]
-            #duplicate_instance = Instance.objects.filter(uuid=new_uuid)[0]
-            #dpi = SaveAttachments(duplicate_instance_pk, media_files)
-            #dpi.start()
-            _save_attachments(duplicate_instance_pk)
+            if len(media_files) > 0:
+                dpi = SaveAttachments(duplicate_instance_pk, media_files)
+                dpi.start()
+                sleep(120) # just for the travis test
+
             raise DuplicateInstance()
         except IndexError:
             pass
@@ -243,9 +228,10 @@ def create_instance(username, xml_file, media_files,
         if not created:
             pi.save(async=False)
 
-    #atta = SaveAttachments(instance.pk, media_files)
-    #atta.start()
-    _save_attachments(instance.pk)
+    if len(media_files) > 0:
+        atta = SaveAttachments(instance.pk, media_files)
+        atta.start()
+        sleep(120) # just for the travis test
 
     return instance
 
