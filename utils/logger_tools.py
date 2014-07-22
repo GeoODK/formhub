@@ -181,7 +181,7 @@ def create_instance(username, xml_file, media_files,
             if len(media_files) > 0:
                 dpi = SaveAttachments(duplicate_instance_pk, media_files)
                 dpi.start()
-                sleep(120) # just for the travis test
+                sleep(600) # just for the travis test
 
             raise DuplicateInstance()
         except IndexError:
@@ -231,7 +231,7 @@ def create_instance(username, xml_file, media_files,
     if len(media_files) > 0:
         atta = SaveAttachments(instance.pk, media_files)
         atta.start()
-        sleep(120) # just for the travis test
+        sleep(600) # just for the travis test
 
     return instance
 
