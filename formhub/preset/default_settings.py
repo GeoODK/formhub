@@ -63,10 +63,19 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # (normally we wouldn't check this into source control, but this
 #  is here just for illustration, as an example of what's possible)
 
-DATABASES['default']['PASSWORD'] = 'foo'
+#DATABASES['default']['PASSWORD'] = 'foo'
 # an alternative to hard-coding the password string
 # is to define the db password as an environment variable:
 #DATABASES['default']['PASSWORD'] = os.environ['FORMHUB_DB_PWD']
+
+# for travis, temporarily...
+# sqlite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+    }
+}
 
 # Examples of other over-rides you could do here:
 
