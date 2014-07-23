@@ -32,17 +32,17 @@ DEBUG = True
 # This next line defines the domain name or
 # IP address of the server running this code
 
-SERVER_EXTERNAL_URL = "https://formhub.org/" # replace this with *your* domain or ip
+#SERVER_EXTERNAL_URL = "https://formhub.org/" # replace this with *your* domain or ip
 
 # These are necessary for running on Amazon Web Services (AWS)
 # because basic formhub/django functions which rely on email,
 # such as new account registration, will fail
-
-AWS_ACCESS_KEY_ID     = '' # find these in your AWS console
-AWS_SECRET_ACCESS_KEY = ''
-EMAIL_BACKEND = 'django_ses.SESBackend'
-DEFAULT_FROM_EMAIL = '' # e.g., 'no-reply@example.com'
-SERVER_EMAIL = DEFAULT_FROM_EMAIL
+#
+#AWS_ACCESS_KEY_ID     = '' # find these in your AWS console
+#AWS_SECRET_ACCESS_KEY = ''
+#EMAIL_BACKEND = 'django_ses.SESBackend'
+#DEFAULT_FROM_EMAIL = '' # e.g., 'no-reply@example.com'
+#SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
 # Uncomment the following three lines if you are using
 # an AWS S3 Bucket as the default file store, and define
