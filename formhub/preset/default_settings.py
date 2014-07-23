@@ -32,7 +32,7 @@ DEBUG = True
 # This next line defines the domain name or
 # IP address of the server running this code
 
-#SERVER_EXTERNAL_URL = "https://formhub.org/" # replace this with *your* domain or ip
+SERVER_EXTERNAL_URL = "https://formhub.org/" # replace this with *your* domain or ip
 
 # These are necessary for running on Amazon Web Services (AWS)
 # because basic formhub/django functions which rely on email,
