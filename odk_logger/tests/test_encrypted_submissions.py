@@ -9,6 +9,9 @@ from odk_logger.models import Instance
 from odk_logger.models import XForm
 from odk_logger.views import submission
 
+# just to debug the test itself
+from time import sleep
+
 
 class TestEncryptedForms(MainTestCase):
 
@@ -42,6 +45,9 @@ class TestEncryptedForms(MainTestCase):
                     'xml_submission_file': f,
                     'submission.xml.enc': ef}
                 response = self.client.post(self._submission_url, post_data)
+                # give create_instance() time to save the attachment
+                sleep(60)
+                # ok, now check
                 self.assertContains(response, message, status_code=201)
                 self.assertEqual(Instance.objects.count(), count + 1)
                 self.assertEqual(Attachment.objects.count(), acount + 1)
