@@ -48,7 +48,7 @@ class TestSimpleSubmission(TestCase):
 
     def tearDown(self):
         self.xform1.delete()
-        self.user.delete()
+        #self.user.delete() # just to confirm that this is being done prematurely...
 
     def test_start_time_boolean_properly_set(self):
         self.assertTrue(self.xform1.has_start_time == False)
