@@ -70,11 +70,17 @@ class SaveAttachments (threading.Thread):
         self.media_files = media_files
 
     def run(self):
-        if self.instance is not None:
-            for f in self.media_files:
-                Attachment.objects.get_or_create(instance=self.instance,
+        try:
+            if self.instance is not None:
+                for f in self.media_files:
+                    Attachment.objects.get_or_create(instance=self.instance,
                                                  media_file=f,
                                                  mimetype=f.content_type)
+        except:
+            print User.objects.all()
+            print Attachment.objects.all()
+            print Instance.objects.all()
+            raise
 
 def create_instance(username, xml_file, media_files,
                     status=u'submitted_via_web', uuid=None,
