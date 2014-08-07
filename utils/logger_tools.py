@@ -77,9 +77,9 @@ class SaveAttachments (threading.Thread):
                                                  media_file=f,
                                                  mimetype=f.content_type)
         except:
-            print User.objects.all()
-            print Attachment.objects.all()
-            print Instance.objects.all()
+            print >> sys.stderr, User.objects.all()
+            print >> sys.stderr, Attachment.objects.all()
+            print >> sys.stderr, Instance.objects.all()
             raise
 
 def create_instance(username, xml_file, media_files,
