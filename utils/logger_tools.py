@@ -14,7 +14,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.files.storage import get_storage_class
 from django.core.mail import mail_admins
 from django.core.servers.basehttp import FileWrapper
-from django.db import IntegrityError, Transaction
+from django.db import IntegrityError
 from django.db.models.signals import pre_delete
 from django.http import HttpResponse, HttpResponseNotFound, \
     StreamingHttpResponse
@@ -72,10 +72,9 @@ class SaveAttachments (threading.Thread):
     def run(self):
         if self.instance is not None:
             for f in self.media_files:
-                with transaction.commit_on_success():
-                    Attachment.objects.get_or_create(instance=self.instance,
-                                                     media_file=f,
-                                                     mimetype=f.content_type)
+                Attachment.objects.get_or_create(instance=self.instance,
+                                                 media_file=f,
+                                                 mimetype=f.content_type)
 
 def create_instance(username, xml_file, media_files,
                     status=u'submitted_via_web', uuid=None,
