@@ -10,8 +10,13 @@ from instance import Instance
 
 
 def upload_to(instance, filename):
+    # feel free to revert, this is just for my own sanity:
+    the_instance = instance.instance
+    user = the_instance.user
+    username = user.username
     return os.path.join(
-        instance.instance.user.username,
+        #instance.instance.user.username,
+        username,
         'attachments',
         os.path.split(filename)[1])
 
