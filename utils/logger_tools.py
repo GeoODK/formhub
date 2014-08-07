@@ -71,8 +71,8 @@ class SaveAttachments (threading.Thread):
 
     def run(self):
         if self.instance is not None:
-            with transaction.commit_on_success():
-                for f in self.media_files:
+            for f in self.media_files:
+                with transaction.commit_on_success():
                     Attachment.objects.get_or_create(instance=self.instance,
                                                      media_file=f,
                                                      mimetype=f.content_type)
