@@ -35,9 +35,10 @@ class TestAttachmentUrl(MainTestCase):
         self.assertEqual(attachment.mimetype, 'image/jpeg')
 
     def tearDown(self):
-        path = os.path.join(settings.MEDIA_ROOT, self.user.username)
-        for root, dirs, files in os.walk(path, topdown=False):
-            for name in files:
-                os.remove(os.path.join(root, name))
-            for name in dirs:
-                os.rmdir(os.path.join(root, name))
+#        path = os.path.join(settings.MEDIA_ROOT, self.user.username)
+#        for root, dirs, files in os.walk(path, topdown=False):
+#            for name in files:
+#                os.remove(os.path.join(root, name))
+#            for name in dirs:
+#                os.rmdir(os.path.join(root, name))
+        pass

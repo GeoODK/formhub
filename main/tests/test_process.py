@@ -37,7 +37,8 @@ class TestSite(MainTestCase):
         super(TestSite, self).setUp()
 
     def tearDown(self):
-        super(TestSite, self).tearDown()
+        #super(TestSite, self).tearDown()
+        pass
 
     def test_process(self, username=None, password=None):
         self._publish_xls_file()

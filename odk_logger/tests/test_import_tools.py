@@ -29,14 +29,16 @@ class TestImportingDatabase(MainTestCase):
                 "odk_logger", "fixtures", "test_forms", "tutorial.xls"))
 
     def tearDown(self):
-        # delete everything we imported
-        Instance.objects.all().delete()  # ?
-        if settings.TESTING_MODE:
-            images = glob.glob(
-                os.path.join(
-                    settings.MEDIA_ROOT, self.user.username, 'attachments', '*'))
-            for image in images:
-                os.remove(image)
+        # b/c travis
+        pass
+#        # delete everything we imported
+#        Instance.objects.all().delete()  # ?
+#        if settings.TESTING_MODE:
+#            images = glob.glob(
+#                os.path.join(
+#                    settings.MEDIA_ROOT, self.user.username, 'attachments', '*'))
+#            for image in images:
+#                os.remove(image)
 
     def test_importing_b1_and_b2(self):
         """

@@ -16,7 +16,8 @@ class TestSurveyorRegistration(TestCase):
         self.xf = xform_factory.create_registration_xform()
     
     def tearDown(self):
-        self.xf.delete()
+        #self.xf.delete()
+        pass
 
     def test_registration_form_loaded(self):
         registration_forms = XForm.objects.filter(title=u"registration")
