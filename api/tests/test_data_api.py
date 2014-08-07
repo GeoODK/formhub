@@ -1,6 +1,8 @@
 from django.test import RequestFactory
 from main.tests.test_base import MainTestCase
 
+from time import sleep
+
 from api.views import DataViewSet, XFormViewSet
 
 
@@ -107,6 +109,7 @@ class TestDataAPI(MainTestCase):
         })
         # no tags
         request = self.factory.get('/', **self.extra)
+        sleep(60) # shot in the dark
         response = view(request, owner='bob', pk=1, formid=1)
         self.assertEqual(response.data, [])
         # add tag "hello"
