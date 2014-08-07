@@ -6,6 +6,8 @@ import urllib2
 
 from cStringIO import StringIO
 
+from time import sleep
+
 from django.contrib.auth.models import User
 from django_digest.test import Client as DigestClient
 from django.test import TransactionTestCase
@@ -111,6 +113,7 @@ class MainTestCase(TransactionTestCase):
                          'transportation', 'instances', s, s + '.xml'),
             os.path.join(self.this_directory, 'fixtures',
                          'transportation', 'instances', s, media_file))
+        sleep(60) # May need to wait for the attachment to save
         attachment = Attachment.objects.all().reverse()[0]
         self.attachment_media_file = attachment.media_file
 
